@@ -1,1 +1,29 @@
+name: signage-screenshot
+
+on:
+  schedule:
+    - cron: "* * * * *"
+  workflow_dispatch:
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - run: npm install
+      - run: npx playwright install chromium
+      - run: npm run shot
+
+      - name: Commit image
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add public/latest.png
+          git commit -m "update screenshot" || exit 0
+          git push
 
