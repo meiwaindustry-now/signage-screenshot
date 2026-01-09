@@ -1,1 +1,12 @@
+{
+  "name": "signage-screenshot",
+  "private": true,
+  "scripts": {
+    "shot": "node scripts/screenshot.js"
+  },
+  "dependencies": {
+    "playwright": "^1.42.0",
+    "sharp": "^0.33.0"
+  }
+}
 
